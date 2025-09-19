@@ -1,0 +1,209 @@
+$engine: 3
+$onesync: on
+$steamRequired: true
+
+name: BCC-VORP
+author: SpiderCero + BryceCanyonCounty
+description: Recipe completo con scripts de BCC + VORP + extras
+
+variables:
+  steam_webApiKey: "none"
+
+tasks:
+
+  # ----------------------
+  # CONFIGURACIÓN BASE
+  # ----------------------
+  - action: write_file
+    path: ./server.cfg
+    contents: |
+      # -------- SERVER.CFG --------
+      endpoint_add_tcp "0.0.0.0:30120"
+      endpoint_add_udp "0.0.0.0:30120"
+      sv_maxclients 48
+      set gamename rdr3
+      set sv_enforceGameBuild 1491
+      sv_licenseKey "changeme"
+      set steam_webApiKey "${steam_webApiKey}"
+      sv_hostname "La Pradera RP | RedM Roleplay"
+      sets sv_projectName "La Pradera RP"
+      sets sv_projectDesc "Servidor RedM Roleplay con VORP + BCC Scripts"
+      load_server_icon myLogo.png
+      sets locale "es-ES"
+      sets tags "roleplay,vorp,bcc,redm"
+      sv_scriptHookAllowed 0
+      sv_endpointprivacy true
+      # Recursos principales
+      ensure mapmanager
+      ensure chat
+      ensure spawnmanager
+      ensure sessionmanager
+      ensure basic-gamemode
+      ensure hardcap
+
+      # VORP Core
+      ensure vorp_core
+      ensure vorp_inventory
+      ensure vorp_character
+      ensure vorp_inputs
+      ensure vorp_progressbar
+      ensure vorp_metabolism
+      ensure vorp_notifications
+      ensure vorp_utils
+      ensure vorp_wildhorse
+      ensure ks_multijob
+
+      # BCC Scripts
+      ensure bcc-utils
+      ensure bcc-acidtrip
+      ensure bcc-ai
+      ensure bcc-animations
+      ensure bcc-banking
+      ensure bcc-barbershop
+      ensure bcc-crafting
+      ensure bcc-farming
+      ensure bcc-goldpanning
+      ensure bcc-hunting
+      ensure bcc-mining
+      ensure bcc-outlaws
+      ensure bcc-pets
+      ensure bcc-stores
+      ensure bcc-trains
+      ensure bcc-weapons
+
+  # ----------------------
+  # DESCARGA DE RECURSOS
+  # ----------------------
+
+  # --- VORP FRAMEWORK ---
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_core
+    ref: main
+    dest: ./resources/[vorp]/vorp_core
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_inventory
+    ref: main
+    dest: ./resources/[vorp]/vorp_inventory
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_character
+    ref: main
+    dest: ./resources/[vorp]/vorp_character
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_inputs
+    ref: main
+    dest: ./resources/[vorp]/vorp_inputs
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_progressbar
+    ref: main
+    dest: ./resources/[vorp]/vorp_progressbar
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_metabolism
+    ref: main
+    dest: ./resources/[vorp]/vorp_metabolism
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_notifications
+    ref: main
+    dest: ./resources/[vorp]/vorp_notifications
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_utils
+    ref: main
+    dest: ./resources/[vorp]/vorp_utils
+
+  - action: download_github
+    src: https://github.com/VORPCORE/vorp_wildhorse
+    ref: main
+    dest: ./resources/[vorp]/vorp_wildhorse
+
+  # Multi Jobs (alternativa a vorp_jobs)
+  - action: download_github
+    src: https://github.com/KorsyScript/ks_multijob
+    ref: main
+    dest: ./resources/[vorp]/ks_multijob
+
+  # --- BCC SCRIPTS ---
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-utils
+    ref: main
+    dest: ./resources/[bcc]/bcc-utils
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-acidtrip
+    ref: main
+    dest: ./resources/[bcc]/bcc-acidtrip
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-ai
+    ref: main
+    dest: ./resources/[bcc]/bcc-ai
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-animations
+    ref: main
+    dest: ./resources/[bcc]/bcc-animations
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-banking
+    ref: main
+    dest: ./resources/[bcc]/bcc-banking
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-barbershop
+    ref: main
+    dest: ./resources/[bcc]/bcc-barbershop
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-crafting
+    ref: main
+    dest: ./resources/[bcc]/bcc-crafting
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-farming
+    ref: main
+    dest: ./resources/[bcc]/bcc-farming
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-goldpanning
+    ref: main
+    dest: ./resources/[bcc]/bcc-goldpanning
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-hunting
+    ref: main
+    dest: ./resources/[bcc]/bcc-hunting
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-mining
+    ref: main
+    dest: ./resources/[bcc]/bcc-mining
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-outlaws
+    ref: main
+    dest: ./resources/[bcc]/bcc-outlaws
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-pets
+    ref: main
+    dest: ./resources/[bcc]/bcc-pets
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-stores
+    ref: main
+    dest: ./resources/[bcc]/bcc-stores
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-trains
+    ref: main
+    dest: ./resources/[bcc]/bcc-trains
+
+  - action: download_github
+    src: https://github.com/BryceCanyonCounty/bcc-weapons
+    ref: main
+    dest: ./resources/[bcc]/bcc-weapons
